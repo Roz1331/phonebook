@@ -1,12 +1,16 @@
-//
-// console.log("js file connected")
-//
-// function addMember() {
-//     console.log("add button was clicked")
-// }
-
 
 $(document).ready(function () {
+
+    $("#new-member").click(function (){
+        $("#add-member").css("visibility", "visible");
+    })
+
+    $("#cancel-btn").click(function (){
+        $("#new-name").val("")
+        $("#phone-number").val("")
+        $("#add-member").css("visibility", "hidden");
+    })
+
     $("#add-member-btn").click(function () {
         console.log("add button was clicked")
 
@@ -20,14 +24,7 @@ $(document).ready(function () {
             console.log("ok")
             $("#new-name").val("")
             $("#phone-number").val("")
+            $("#add-member").css("visibility", "hidden");
         })
-
-        // let messageText = $("#message").val();
-        // console.log("start sending message: " + messageText);
-        // if (messageText === "") return; // if message is empty
-        // $.get('/message/send', { userName: userName, message: messageText}, function(data) {
-        //     console.log("message was sent");
-        //     $("#message").val("")
-        // })
     })
 });

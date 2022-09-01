@@ -11,8 +11,11 @@ import java.util.List;
 
 @Controller
 public class PhonesTableController {
-    @Autowired
-    MemberService memberService;
+    final MemberService memberService;
+
+    public PhonesTableController(MemberService memberService) {
+        this.memberService = memberService;
+    }
 
     @GetMapping("/")
     public String homePage(Model model) {

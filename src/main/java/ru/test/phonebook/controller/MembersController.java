@@ -9,8 +9,11 @@ import ru.test.phonebook.service.MemberService;
 
 @RestController
 public class MembersController {
-    @Autowired
-    private MemberService memberService;
+    private final MemberService memberService;
+
+    public MembersController(MemberService memberService) {
+        this.memberService = memberService;
+    }
 
     @GetMapping("add")
     public void addMember(@RequestParam(value = "name") String name,
