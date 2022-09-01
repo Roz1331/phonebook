@@ -1,6 +1,8 @@
 package ru.test.phonebook.entity;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @Entity
@@ -11,7 +13,16 @@ public class Member {
     private Long id;
     private String name;
     private String phoneNumber;
-    private Date date;
+    private String date;
+
+    public Member(String name, String phoneNumber) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        this.date = dtf.format(LocalDateTime.now());
+    }
+
+    public Member() {}
 
     public String getName() {
         return name;
@@ -29,11 +40,11 @@ public class Member {
         this.phoneNumber = phoneNumber;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 }
