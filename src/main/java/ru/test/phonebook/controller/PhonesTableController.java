@@ -13,6 +13,7 @@ import java.util.List;
 public class PhonesTableController {
     final MemberService memberService;
 
+    @Autowired
     public PhonesTableController(MemberService memberService) {
         this.memberService = memberService;
     }

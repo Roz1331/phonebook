@@ -37,9 +37,19 @@ $(document).ready(function () {
                 "<td> "+ data.name + "</td>" +
                 "<td> "+ data.phoneNumber + "</td>" +
                 "<td> "+ data.date + "</td>" +
+                "<td class=\"delBtn\"> x</td>" +
                 "</tr>"
             let tableBody = $("table tbody");
             tableBody.append(newRow);
         })
     }
+
 });
+
+function deleteById(id) {
+    console.log("delete method for " + id)
+    $.get('delete', {id: id}, function () {
+        $('tr#' + id).remove();
+        console.log("row deleted")
+    })
+}

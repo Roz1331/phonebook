@@ -15,6 +15,7 @@ import java.util.Map;
 public class MembersController {
     private final MemberService memberService;
 
+    @Autowired
     public MembersController(MemberService memberService) {
         this.memberService = memberService;
     }
@@ -37,6 +38,11 @@ public class MembersController {
         result.put("date", lastMember.getDate());
 
         return result;
+    }
+
+    @GetMapping("delete")
+    public void deleteMember(@RequestParam(value = "id") String id) {
+        memberService.deleteMember(Long.parseLong(id));
     }
 
 }

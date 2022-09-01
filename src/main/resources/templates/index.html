@@ -14,17 +14,21 @@
 
     <table class="phones-table" style="width:70%">
         <thead>
-            <th style="width:10%">ID</th>
+            <th>ID</th>
             <th style="width:35%">Name</th>
             <th style="width:35%">Phone number</th>
             <th>Date</th>
         </thead>
         <tbody>
-            <tr id="main-table" th:each="member: ${allMembers}">
+            <tr id="main-table" th:each="member: ${allMembers}" th:id="${member.getId()}">
                 <td th:text="${member.getId()}"/>
                 <td th:text="${member.getName()}"/>
                 <td th:text="${member.getPhoneNumber()}"/>
                 <td th:text="${member.getDate()}"/>
+
+                <td class="delBtn" th:text="x" th:onclick="deleteById([[ ${member.getId()} ]])" />
+
+
                 <!--            <td>-->
                 <!--                <form action="@{/admin}" method="post">-->
                 <!--                    <input type="hidden" name="userId" value="${user.id}"/>-->
