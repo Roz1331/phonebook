@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.test.phonebook.entity.Member;
 import ru.test.phonebook.service.MemberService;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @RestController
 public class MembersController {
     private final MemberService memberService;
@@ -19,6 +23,20 @@ public class MembersController {
     public void addMember(@RequestParam(value = "name") String name,
                           @RequestParam(value = "phoneNumber") String phoneNumber) {
         memberService.saveMember(new Member(name, phoneNumber));
+    }
+
+    @GetMapping("update")
+    public Map<String, Object> getLastMember() {
+        List<Member> members = memberService.allMembers();
+
+        Member lastMember = members.get(members.size() - 1);
+        Map<String, Object> result = new HashMap<>();
+        result.put("id", lastMember.getId());
+        result.put("name", lastMember.getName());
+        result.put("phoneNumber", lastMember.getPhoneNumber());
+        result.put("date", lastMember.getDate());
+
+        return result;
     }
 
 }

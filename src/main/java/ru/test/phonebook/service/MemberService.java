@@ -10,8 +10,11 @@ import java.util.List;
 @Service
 public class MemberService {
 
-    @Autowired
-    PhonesRepository phonesRepository;
+    private final PhonesRepository phonesRepository;
+
+    public MemberService(PhonesRepository phonesRepository) {
+        this.phonesRepository = phonesRepository;
+    }
 
     public List<Member> allMembers() {
         return phonesRepository.findAll();

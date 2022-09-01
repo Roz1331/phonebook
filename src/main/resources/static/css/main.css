@@ -5,3 +5,12 @@
 #add-member {
     visibility: hidden;
 }
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.new-member {
+    margin-top: 20px;
+}

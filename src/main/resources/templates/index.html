@@ -12,13 +12,30 @@
 <div class="main-container">
     <h3>Best phonebook ever</h3>
 
-    <table class="phones-table">
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Phone number</th>
+    <table class="phones-table" style="width:70%">
+        <thead>
+            <th style="width:10%">ID</th>
+            <th style="width:35%">Name</th>
+            <th style="width:35%">Phone number</th>
             <th>Date</th>
-        </tr>
+        </thead>
+        <tbody>
+            <tr id="main-table" th:each="member: ${allMembers}">
+                <td th:text="${member.getId()}"/>
+                <td th:text="${member.getName()}"/>
+                <td th:text="${member.getPhoneNumber()}"/>
+                <td th:text="${member.getDate()}"/>
+                <!--            <td>-->
+                <!--                <form action="@{/admin}" method="post">-->
+                <!--                    <input type="hidden" name="userId" value="${user.id}"/>-->
+                <!--                    <input type="hidden" name="action" value="delete"/>-->
+                <!--                    <button type="submit">Delete</button>-->
+                <!--                </form>-->
+
+                <!--            </td>-->
+            </tr>
+        </tbody>
+
     </table>
 
     <button class="new-member" id="new-member">New...</button>

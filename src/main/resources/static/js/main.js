@@ -6,25 +6,40 @@ $(document).ready(function () {
     })
 
     $("#cancel-btn").click(function (){
-        $("#new-name").val("")
-        $("#phone-number").val("")
-        $("#add-member").css("visibility", "hidden");
+        hideForm()
     })
 
     $("#add-member-btn").click(function () {
-        console.log("add button was clicked")
-
         let name = $("#new-name").val()
         let phoneNumber = $("#phone-number").val()
 
-        console.log(name)
-        console.log(phoneNumber)
-
         $.get('/add', {name: name, phoneNumber: phoneNumber}, function () {
             console.log("ok")
-            $("#new-name").val("")
-            $("#phone-number").val("")
-            $("#add-member").css("visibility", "hidden");
+            displayLatestMember()
+            hideForm()
         })
     })
+
+    function hideForm() {
+        $("#new-name").val("")
+        $("#phone-number").val("")
+        $("#add-member").css("visibility", "hidden");
+    }
+
+    function displayLatestMember() {
+        $.get('update', function (data) {
+
+            console.log("update table ok")
+            console.log(data)
+
+            let newRow = "<tr>" +
+                "<td> "+ data.id + "</td>" +
+                "<td> "+ data.name + "</td>" +
+                "<td> "+ data.phoneNumber + "</td>" +
+                "<td> "+ data.date + "</td>" +
+                "</tr>"
+            let tableBody = $("table tbody");
+            tableBody.append(newRow);
+        })
+    }
 });
