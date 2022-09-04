@@ -15,7 +15,13 @@ table, th, td {
     margin-top: 20px;
 }
 
+.editBtn {
+    cursor: pointer;
+}
+
 .delBtn {
     cursor: pointer;
     color: red;
 }
+
+

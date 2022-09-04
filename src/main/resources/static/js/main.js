@@ -1,4 +1,6 @@
 
+let iii;
+
 $(document).ready(function () {
 
     $("#new-member").click(function (){
@@ -27,16 +29,17 @@ $(document).ready(function () {
     }
 
     function displayLatestMember() {
-        $.get('update', function (data) {
+        $.get('updateTable', function (data) {
 
             console.log("update table ok")
             console.log(data)
 
-            let newRow = "<tr>" +
+            let newRow = "<tr th:id=\"" + data.id + "\">" +
                 "<td> "+ data.id + "</td>" +
                 "<td> "+ data.name + "</td>" +
                 "<td> "+ data.phoneNumber + "</td>" +
                 "<td> "+ data.date + "</td>" +
+                "<td class=\"editBtn\"> edit</td>" +
                 "<td class=\"delBtn\"> x</td>" +
                 "</tr>"
             let tableBody = $("table tbody");
@@ -44,12 +47,51 @@ $(document).ready(function () {
         })
     }
 
+    $(".editBtn").click(function () {
+        let id = $(this).parent().attr("id")
+        console.log(id)
+        iii = id
+        $("#open-modal").click()
+    })
+
+    $(".delBtn").click(function () {
+        let id = $(this).parent().attr("id")
+        console.log("delete method for " + id)
+        $.get('delete', {id: id}, function () {
+            $('tr#' + id).remove();
+            console.log("row deleted")
+        })
+    })
+
+    $(".update-member").click(function () {
+        let name = $("#edit-name").val()
+        let phoneNumber = $("#edit-phone").val()
+        console.log(name)
+        console.log(phoneNumber)
+
+        $.get('updateMember', {id : iii, name: name, phoneNumber: phoneNumber}, function (data) {
+        })
+        $("#edit-name").val("")
+        $("#edit-phone").val("")
+        $('#exampleModal').modal('hide');
+    })
+
 });
 
-function deleteById(id) {
-    console.log("delete method for " + id)
-    $.get('delete', {id: id}, function () {
-        $('tr#' + id).remove();
-        console.log("row deleted")
-    })
-}
+// function updateById() {
+//
+//     let name = $("#edit-name").val()
+//     let phoneNumber = $("#edit-phone").val()
+//     console.log(name)
+//     console.log(phoneNumber)
+//
+//     // var m = /*[[${editingId}]]*/ 'Sebastian';
+//     console.log(iii)
+//
+//
+//     // let m = [[${editingId}]]
+//     // console.log(m)
+//
+//     // $.get('updateMember', function (data) {
+//     // })
+// }
