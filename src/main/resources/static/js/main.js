@@ -69,29 +69,17 @@ $(document).ready(function () {
         console.log(name)
         console.log(phoneNumber)
 
-        $.get('updateMember', {id : iii, name: name, phoneNumber: phoneNumber}, function (data) {
+        $.get('updateMember', {id : iii, name: name, phoneNumber: phoneNumber}, function () {
         })
         $("#edit-name").val("")
         $("#edit-phone").val("")
-        $('#exampleModal').modal('hide');
+        $('#exampleModal').modal('hide')
+
+        let children = $("tr#" + iii).children()
+        children[1].innerHTML = name
+         children[2].innerHTML = phoneNumber
+        console.log(children)
+
     })
 
 });
-
-// function updateById() {
-//
-//     let name = $("#edit-name").val()
-//     let phoneNumber = $("#edit-phone").val()
-//     console.log(name)
-//     console.log(phoneNumber)
-//
-//     // var m = /*[[${editingId}]]*/ 'Sebastian';
-//     console.log(iii)
-//
-//
-//     // let m = [[${editingId}]]
-//     // console.log(m)
-//
-//     // $.get('updateMember', function (data) {
-//     // })
-// }
