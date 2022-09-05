@@ -66,19 +66,23 @@ $(document).ready(function () {
     $(".update-member").click(function () {
         let name = $("#edit-name").val()
         let phoneNumber = $("#edit-phone").val()
-        console.log(name)
-        console.log(phoneNumber)
+        // console.log(name)
+        // console.log(phoneNumber)
 
-        $.get('updateMember', {id : iii, name: name, phoneNumber: phoneNumber}, function () {
+        let children = $("tr#" + iii).children()
+
+        $.get('updateMember', {id : iii, name: name, phoneNumber: phoneNumber}, function (data) {
+            console.log(data)
+            children[1].innerHTML = name
+            children[2].innerHTML = phoneNumber
+            children[3].innerHTML = data.date
         })
+
         $("#edit-name").val("")
         $("#edit-phone").val("")
         $('#exampleModal').modal('hide')
 
-        let children = $("tr#" + iii).children()
-        children[1].innerHTML = name
-         children[2].innerHTML = phoneNumber
-        console.log(children)
+        // console.log(children)
 
     })
 

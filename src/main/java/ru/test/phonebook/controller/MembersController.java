@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.test.phonebook.entity.Member;
 import ru.test.phonebook.service.MemberService;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,7 +48,7 @@ public class MembersController {
     }
 
     @GetMapping("updateMember")
-    public void updateMember(@RequestParam(value = "id") String id,
+    public Map<String, Object> updateMember(@RequestParam(value = "id") String id,
                              @RequestParam(value = "name") String name,
                              @RequestParam(value = "phoneNumber") String phoneNumber) {
 
@@ -53,6 +56,12 @@ public class MembersController {
         Member member = memberService.findById(id_parsed);
         member.setName(name);
         member.setPhoneNumber(phoneNumber);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        String date = dtf.format(LocalDateTime.now());
+        member.setDate(date);
         memberService.saveMember(member);
+        Map<String, Object> result = new HashMap<>();
+        result.put("date", date);
+        return result;
     }
 }
